@@ -15,15 +15,25 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*7i@psxup%m7@i3ojk-)_(08ym2ml_c!+xyp*e74l&vyo4lbj3'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+try:
+    from sp_settings import SECRET_KEY, database_name, database_user, \
+        database_password, DISQUS_API_KEY, DISQUS_WEBSITE_SHORTNAME, EMAIL_HOST, \
+        EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, SITE_ID, RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, DEBUG
+except ImportError:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = 'acyt)crpsd#m!@*t8jcv5=#mchgydm3%um=7xp*5his@n$x*t8'
+    database_name = 'fotoalpha'
+    database_user = 'admin'
+    database_password = 'qazwsx'
+    DISQUS_API_KEY = 'nonono'
+    DISQUS_WEBSITE_SHORTNAME = 'fotoalpha'
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_HOST_USER = 'nonono@yandex.ru'
+    EMAIL_HOST_PASSWORD = 'nonono'
+    SITE_ID = 2
+    RECAPTCHA_PUBLIC_KEY = '1111'
+    RECAPTCHA_PRIVATE_KEY = '2222'
+    DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -31,12 +41,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.flatpages',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'foto',
+    'bootstrap3',
+    'ckeditor',
+    'ckeditor_uploader',
+    'disqus',
+    'snowpenguin.django.recaptcha2',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -48,6 +67,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'fotoalpha.urls'
@@ -55,7 +75,7 @@ ROOT_URLCONF = 'fotoalpha.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +96,11 @@ WSGI_APPLICATION = 'fotoalpha.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': database_name,
+        'USER': database_user,
+        'PASSWORD': database_password,
+        'HOST': '127.0.0.1'
     }
 }
 
@@ -104,9 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -119,3 +142,81 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
+        }
+    },
+    'formatters': {
+        'main_formatter': {
+            'format': '%(levelname)s:%(name)s: %(message)s '
+                      '(%(asctime)s; %(filename)s:%(lineno)d)',
+            'datefmt': "%Y-%m-%d %H:%M:%S",
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'main_formatter',
+        },
+        'production_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/main.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 7,
+            'formatter': 'main_formatter',
+            'filters': ['require_debug_false'],
+        },
+        'debug_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/main_debug.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 7,
+            'formatter': 'main_formatter',
+            'filters': ['require_debug_true'],
+        },
+        'null': {
+            "class": 'logging.NullHandler',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['null', ],
+        },
+        'py.warnings': {
+            'handlers': ['null', ],
+        },
+        '': {
+            'handlers': ['console', 'production_file', 'debug_file'],
+            'level': "DEBUG",
+        },
+    }
+}
+
+EMAIL_USE_TLS = True
+GRAPPELLI_ADMIN_TITLE = "FOTOALPHA"

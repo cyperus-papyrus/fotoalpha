@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+from fotoalpha import settings
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
+    url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
+    url(r'^admin-for-super-foto-site/', include(admin.site.urls)),  # admin site
+    url(r'', include('foto.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # url(r'', include('django.contrib.flatpages.urls')),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
