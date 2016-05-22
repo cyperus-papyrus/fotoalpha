@@ -19,8 +19,17 @@ def index(request):
 
 
 def foto(request, url):
-    foto = get_object_or_404(Foto, url=url)
-    return render(request, 'foto/gallery.html', {'foto': foto})
+    post_foto = get_object_or_404(Foto, url=url)
+    return render(request, 'foto/gallery.html', {'foto': post_foto})
+
+
+def allfoto(request):
+    post_foto = Foto.objects.all
+    return render(request, 'foto/gallery.html', {'foto': post_foto})
+
+
+def about(request):
+    return render(request, 'foto/about.html')
 
 
 def categories(request, category):
