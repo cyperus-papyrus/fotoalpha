@@ -8,11 +8,11 @@
                                     <div class="banner-main-home-text">
                                         <div class="heading">
                                             <h1>FOTOALFA</h1>
-                                            <p class="text-uppercase">Сайт студии fotoalfa.</p>
+                                            <p class="text-uppercase">Сайт студии fotoalfa</p>
                                         </div>
                                         <div class="desc">
                                             <p>Это - сайт-портфолио студии fotoalfa. Тут вы найдете фотографии.</p>
-                                            <button type="button" class="">SAGITIS SELIT</button>
+                                            <button type="button" class="">КНОПКА</button>
                                         </div>
                                     </div>
                                     <img src="{% static 'images/home-img-1.png' %}" alt="Image" class="img-responsive">
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-sm-12 location-main">
                                             <div class="pull-left location">
-                                                <button type="button" class="btn btn-default">ЧИТАТЬ ДАЛЬШЕ</button>
+                                                <a class="btn btn-default" href="{% url 'foto' url=f.url %}" role="button">ЧИТАТЬ ДАЛЬШЕ</a>
                                             </div>
                                             <div class="pull-right user-icons">
                                                 <a href="#"><i class="fa fa-star fa-2x"></i></a>

@@ -8,7 +8,7 @@ from fotoalpha import settings
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^gallery/', views.allfoto, name='allfoto'),
-    url(r'^gallery/(?P<url>[\w+-_]+)/$', views.foto, name='foto'),
+    url(r'^foto/(?P<url>[\w+-_]+)/$', views.foto, name='foto'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^category/(?P<category>[0-9]+)/$', views.categories, name='categories'),
     url(r'^contact/', views.contact, name='contact'),

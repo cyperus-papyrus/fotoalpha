@@ -616,7 +616,7 @@ body {
 	font-weight: bold;
 	color: #19beb6;
 	margin-top: 0;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 .view_more_main {

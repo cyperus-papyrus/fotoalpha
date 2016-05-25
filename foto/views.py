@@ -20,7 +20,7 @@ def index(request):
 
 def foto(request, url):
     post_foto = get_object_or_404(Foto, url=url)
-    return render(request, 'foto/gallery.html', {'foto': post_foto})
+    return render(request, 'foto/foto.html', {'foto': post_foto})
 
 
 def allfoto(request):

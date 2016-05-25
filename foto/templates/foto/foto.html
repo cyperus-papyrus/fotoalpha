@@ -1,0 +1,24 @@
+{% extends 'foto/base.html' %}
+{% load staticfiles %}
+    {% block head %}
+    {% endblock %}
+                   {% block content %}
+
+                    <!-- content-main -->
+                    <div class="content-main gallery_main">
+
+                        <div class="gallery-main-inner">
+
+                            <div class="col-md-12 gallery_title_main">
+                                <div class="gallery_title">
+                                    <h3>{{ foto.title }}</h3>
+                                    <h4>{{ foto.text|safe }}</h4>
+                                </div><br style="clear:both;"/>
+                            </div>
+
+                            <div id="content" class="gallery-images-container">
+                             <img src="/media/{{ foto.image }}" alt="{{ foto.title }}" class="img-thumbnail" align="center">
+                        </div>
+                       </div>
+                    </div>
+                  {% endblock %}
