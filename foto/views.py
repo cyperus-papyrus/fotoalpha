@@ -13,7 +13,7 @@ def show_404(request):
 
 
 def index(request):
-    fotos = Foto.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    fotos = Foto.objects.filter(is_in_mainpage=True)
     categories = Category.objects.all()
     return render(request, 'foto/index.html', {'fotos': fotos, 'categories': categories})
 
@@ -24,7 +24,7 @@ def foto(request, url):
 
 
 def allfoto(request):
-    post_foto = Foto.objects.all
+    post_foto = Foto.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'foto/gallery.html', {'foto': post_foto})
 
 

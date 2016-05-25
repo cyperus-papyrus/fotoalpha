@@ -35,7 +35,7 @@ class Foto(models.Model):
     image_prev = models.ImageField(upload_to='foto/media/', default='/foto/media/default.jpg',
                                    verbose_name=u'Превью', help_text=u"Загрузите превью фотографии")
     meta_description = models.CharField(max_length=200, verbose_name=u'Мета тег "description"')
-    is_in_carousel = models.BooleanField(default=False, verbose_name=u'Добавить в карусель')
+    is_in_mainpage = models.BooleanField(default=False, verbose_name=u'Отображать на главной странице')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=u'Раздел')
     url = models.CharField(max_length=200, unique=True, null=True, blank=True, verbose_name=u'URL страницы',
                            help_text="Начальный и закрывающий / вводить НЕ нужно. Допустимы только латинские буквы, \
