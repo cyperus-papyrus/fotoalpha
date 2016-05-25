@@ -11,6 +11,7 @@ class ContactForm(forms.Form):
         attrs={'size': '40', 'class': 'form-control', 'placeholder': u'Введите тему сообщения'}))
     sender = forms.EmailField(widget=forms.TextInput(attrs={'size': '40', 'class': 'form-control',
                                                             'placeholder': u'Введите ваш email'}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control',
+                                                           'placeholder': u'Введите текст сообщения'}))
     copy = forms.BooleanField(required=False)
     captcha = ReCaptchaField(widget=ReCaptchaWidget())

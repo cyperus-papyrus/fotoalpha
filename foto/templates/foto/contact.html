@@ -20,26 +20,27 @@
                             <div class="row">  
                                 <div class="col-sm-12 col-md-6 contact_left">        
                                     <form class="form-horizontal" method="post" action="#">
-          
-                                        <div class="form-group">                                    
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="NAME..." value="">                                    
-                                        </div>
-          
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="EMAIL..." value="">      
-                                        </div>
-          
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="SUBJECT..." value="">        
-                                        </div>
-                                      
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="4" name="message" placeholder="MESSAGE..."></textarea>
-                                        </div>
-                                            
-                                        <div class="form-group">
-                                            <input id="submit" name="submit" type="submit" value="Send" class="btn view_more btn-submit">
-                                        </div>            
+                                    {% csrf_token %}
+                                        {{ form.non_field_errors }}
+                                    <div>
+                                      <span style="color: red;">{{ form.subject.errors }}</span>
+                                      {{ form.subject }} <br />
+                                    </div>
+                                    <div>
+                                      <span style="color: red;">{{ form.sender.errors }}</span>
+                                      {{ form.sender }} <br />
+                                    </div>
+                                    <div>
+                                      <span style="color: red;">{{ form.message.errors }}</span>
+                                      {{ form.message }} <br />
+                                    </div>
+                                    <div>
+                                      <span style="color: red;">{{ form.copy.errors }}</span>
+                                      <label for="id_copy">Отправить копию себе {{ form.copy }}</label>
+                                    </div>
+                                    <span style="color: red;">{{ form.captcha.errors }}</span>
+                                    <div>{{ form.captcha }}</div>
+                                    <input type="submit" class="btn btn-danger" value="Отправить"/>
                                     
                                     </form>    
                                 </div> <!-- .contact-left -->
