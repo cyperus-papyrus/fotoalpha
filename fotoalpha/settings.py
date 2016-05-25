@@ -35,7 +35,7 @@ except ImportError:
     RECAPTCHA_PRIVATE_KEY = '2222'
     DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','fotoalfa.ru']
 
 
 # Application definition
