@@ -9,7 +9,7 @@ class FotoAdmin(admin.ModelAdmin):
             'fields': ('title', 'image', 'image_prev', 'text', 'published_date',
                        ('meta_description', 'category', 'url',))
         }),
-        ('Carousel', {
+        (u'Главная страница', {
             'classes': ('grp-collapse grp-closed',),
             'fields': ('is_in_mainpage',)
         }),

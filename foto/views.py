@@ -13,7 +13,7 @@ def show_404(request):
 
 
 def index(request):
-    fotos = Foto.objects.filter(is_in_mainpage=True)
+    fotos = Foto.objects.all
     categories = Category.objects.all()
     return render(request, 'foto/index.html', {'fotos': fotos, 'categories': categories})
 

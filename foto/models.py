@@ -53,5 +53,5 @@ class Foto(models.Model):
 
     class Meta:
         app_label = 'foto'
-        verbose_name = u'Фотография'
+        verbose_name = u'Фотографию'
         verbose_name_plural = u'Фотографии'
