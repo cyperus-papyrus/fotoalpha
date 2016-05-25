@@ -20,20 +20,20 @@
                             </div>
                         </div>
                         <div class="row margin-b-30">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 {% for f in fotos %}
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="box">
                                     <div class="box-icon">
                                         <img src="media/{{ f.image_prev }}" alt="Image" class="img-responsive">
                                     </div>
                                     <div class="info float-container">
                                         <div class="col-sm-12 title">
-                                            <h3 class="text-uppercase">Proin gravida nibhvel</h3>
-                                            <h4 class="text-uppercase">mauris vitae erat</h4>
+                                            <h3 class="text-uppercase">{{ f.title }}</h3>
+                                            <p>{{ f.text|safe|striptags|truncatewords:5  }}</p>
                                         </div>
                                         <div class="col-sm-12 location-main">
                                             <div class="pull-left location">
-                                                <i class="fa fa-map-marker fa-2x"></i><span>LONDON</span>
+                                                <button type="button" class="btn btn-default">ЧИТАТЬ ДАЛЬШЕ</button>
                                             </div>
                                             <div class="pull-right user-icons">
                                                 <a href="#"><i class="fa fa-star fa-2x"></i></a>
@@ -43,9 +43,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             {% endfor %}
                                 <br />
-                            </div>
                         </div> <!-- row -->
                     </div> <!-- .content-main -->
                     {% endblock %}
