@@ -11,7 +11,7 @@ class FotoAdmin(admin.ModelAdmin):
         }),
         ('Carousel', {
             'classes': ('grp-collapse grp-closed',),
-            'fields': ('is_in_carousel',)
+            'fields': ('is_in_mainpage',)
         }),
     )
 
