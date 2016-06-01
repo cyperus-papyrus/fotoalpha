@@ -36,9 +36,7 @@ def categories(request, category):
     fotos = Foto.objects.filter(category=category)
     name = Category.objects.filter(id=category)
     catg = Category.objects.all()
-    what = u'из рубрики'
-    return render(request, 'foto/category.html', {'fotos': fotos, 'categories': catg,
-                                              'what': what})
+    return render(request, 'foto/category.html', {'fotos': fotos, 'categories': catg, 'category': name})
 
 
 def contact(request):
