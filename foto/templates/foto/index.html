@@ -27,8 +27,8 @@
                                     </div>
                                     <div class="info float-container">
                                         <div class="col-sm-12 title">
-                                            <h3 class="text-uppercase">{{ f.title }}</h3>
-                                            <p>{{ f.text|safe|striptags|truncatewords:5  }}</p>
+                                            <h3 class="text-uppercase"><a href="{% url 'foto' url=f.url %}" title="{{ f.title }}">{{ f.title|truncatewords:2 }}</a></h3>
+                                            <p>{{ f.text|safe|striptags|truncatechars:80  }}</p>
                                         </div>
                                         <div class="col-sm-12 location-main">
                                             <div class="pull-left location">
