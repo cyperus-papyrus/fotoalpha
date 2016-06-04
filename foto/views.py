@@ -52,7 +52,7 @@ def contact(request):
             message += '\n\n' + u'email отправителя: ' + sender + '\n' + u'ip отправителя: ' + client_address
             copy = form.cleaned_data['copy']
 
-            recipient = ['robot@rudut.ru']
+            recipient = ['melnikovalena@yandex.ru']
             u_recipient = []
             # Если пользователь захотел получить копию себе, добавляем его в список получателей
             if copy:

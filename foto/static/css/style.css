@@ -289,6 +289,7 @@ body {
 	float: left;
 	width: 100%;
 	padding-left: 15px;
+	padding-top: 15px;
 }
 .desc p {
 	line-height: 1.8;
@@ -958,4 +959,11 @@ textarea.form-control {	height:135px; }
 
 	.gallery_title h3 { font-size: 40px; }
 	.gallery_title h4 { font-size: 18px; }
+}
+
+.logo-img {
+    clear:
+    padding: 0;
+    margin: 0;
+    float: left;
 }
