@@ -29,6 +29,8 @@
                             </div>                
 
                             <div class="row text-center view_more_main">
+                                <div class="pagination">
+                                <span class="step-links">
                                 {% if contacts.has_previous %}
                                 <a href="?page={{ contacts.previous_page_number }}" class="btn view_more">назад</a> &nbsp;&nbsp;&nbsp;
                                 {% endif %}
@@ -37,7 +39,7 @@
 
                                 {% if contacts.has_next %}
                                 <a href="?page={{ contacts.next_page_number }}" class="btn view_more">вперед</a>
-                                {% endif %}
+                                {% endif %}</span></div>
                             </div>
 
                         </div>
