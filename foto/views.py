@@ -1,11 +1,12 @@
 # coding=utf-8
 from django.utils import timezone
 from .models import Foto, Category
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from .forms import ContactForm
 from ipware.ip import get_real_ip
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def show_404(request):
@@ -25,7 +26,17 @@ def foto(request, url):
 
 def allfoto(request):
     post_foto = Foto.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'foto/gallery.html', {'foto': post_foto})
+    paginator = Paginator(post_foto, 8)
+    page = request.GET.get('page')
+    try:
+        fotos = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        fotos = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        fotos = paginator.page(paginator.num_pages)
+    return render_to_response('foto/gallery.html', {'foto': fotos})
 
 
 def about(request):

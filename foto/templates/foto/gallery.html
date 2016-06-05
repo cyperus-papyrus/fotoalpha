@@ -13,42 +13,31 @@
                             
                             <div class="col-md-12 gallery_title_main">
                                 <div class="gallery_title">
-                                    <h3>GALLERY</h3>
-                                    <h4>RESPONSIVE DESIGN</h4>
+                                    <h3>ГАЛЕРЕЯ</h3>
+                                    <h4>ФОТОГРАФИИ</h4>
                                 </div><br style="clear:both;"/>
                             </div>
 
                             <div id="content" class="gallery-images-container">
                                 <div class="box-gutter"></div>
                                 <div class="box-sizer"></div>
+                                {% for f in foto %}
                                 <div class="box">
-                                    <a href="images/gallery-item-1-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-1.jpg' %}"></a>
+                                    <a href="/media/{{ f.image }}"><img alt="Agra picture" src="/media/{{ f.image_prev }}"></a>
                                 </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-4-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-4.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-6-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-6.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-2-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-2.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-5-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-5.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-7-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-7.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-8-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-8.jpg' %}"></a>
-                                </div>
-                                <div class="box">
-                                    <a href="images/gallery-item-3-big.jpg"><img alt="Agra picture" src="{% static 'images/gallery-item-3.jpg' %}"></a>
-                                </div>
+                                {% endfor %}
                             </div>                
 
                             <div class="row text-center view_more_main">
-                               <a href="#" class="btn view_more">view more</a>
+                                {% if contacts.has_previous %}
+                                <a href="?page={{ contacts.previous_page_number }}" class="btn view_more">назад</a> &nbsp;&nbsp;&nbsp;
+                                {% endif %}
+
+                            <span class="current">Страница {{ contacts.number }} из {{ contacts.paginator.num_pages }}.</span>
+
+                                {% if contacts.has_next %}
+                                <a href="?page={{ contacts.next_page_number }}" class="btn view_more">вперед</a>
+                                {% endif %}
                             </div>
 
                         </div>
