@@ -1,6 +1,22 @@
 {% extends 'foto/base.html' %}
 {% load staticfiles %}
     {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/simplebox.css' %}">
+<script src="{% static 'js/simplebox_util.js' %}"></script>
+<script type="text/javascript">
+(function(){
+var boxes=[],els,i,l;
+if(document.querySelectorAll){
+els=document.querySelectorAll('a[rel=simplebox]');
+Box.getStyles('{% static 'css/simplebox.css' %}','{% static 'css/simplebox.css' %}');
+Box.getScripts('{% static 'js/simplebox.js' %}','{% static 'js/simplebox.js' %}',function(){
+simplebox.init();
+for(i=0,l=els.length;i<l;++i)
+simplebox.start(els[i]);
+simplebox.start('a[rel=simplebox]');
+});
+}
+})();</script>
     {% endblock %}
                    {% block content %}
 
@@ -17,7 +33,7 @@
                             </div>
 
                             <div id="content" class="gallery-images-container">
-                             <img src="/media/{{ foto.image }}" alt="{{ foto.title }}" class="img-thumbnail" align="center">
+                             <a rel="simplebox" href="/media/{{ foto.image }}"><img src="/media/{{ foto.image }}" alt="{{ foto.title }}" class="img-thumbnail" align="center"></a>
                         </div>
                        </div>
                     </div>
