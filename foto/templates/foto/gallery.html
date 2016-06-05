@@ -30,15 +30,16 @@
 
                             <div class="row text-center view_more_main">
                                 <div class="pagination">
-                                <span class="step-links">
-                                {% if contacts.has_previous %}
-                                <a href="?page={{ contacts.previous_page_number }}" class="btn view_more">назад</a> &nbsp;&nbsp;&nbsp;
+                               <span class="step-links">
+
+                                {% if foto.has_previous %}
+                                <a href="?page={{ foto.previous_page_number }}" class="btn view_more">назад</a>
                                 {% endif %}
 
-                            <span class="current">Страница {{ contacts.number }} из {{ contacts.paginator.num_pages }}.</span>
+                            <span class="current">&nbsp;&nbsp;&nbsp; Страница {{ foto.number }} из {{ foto.paginator.num_pages }} &nbsp;&nbsp;&nbsp;</span>
 
-                                {% if contacts.has_next %}
-                                <a href="?page={{ contacts.next_page_number }}" class="btn view_more">вперед</a>
+                                {% if foto.has_next %}
+                                <a href="?page={{ foto.next_page_number }}" class="btn view_more">вперед</a>
                                 {% endif %}</span></div>
                             </div>
 
