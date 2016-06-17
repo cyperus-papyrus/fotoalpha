@@ -26,7 +26,8 @@ def foto(request, url):
 
 def allfoto(request):
     post_foto = Foto.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    paginator = Paginator(post_foto, 1)
+    categories = Category.objects.all()
+    paginator = Paginator(post_foto, 3)
     page = request.GET.get('page')
     try:
         fotos = paginator.page(page)
@@ -36,7 +37,7 @@ def allfoto(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         fotos = paginator.page(paginator.num_pages)
-    return render_to_response('foto/gallery.html', {'foto': fotos})
+    return render_to_response('foto/gallery.html', {'foto': fotos, 'categories': categories})
 
 
 def about(request):
@@ -63,7 +64,7 @@ def contact(request):
             message += '\n\n' + u'email отправителя: ' + sender + '\n' + u'ip отправителя: ' + client_address
             copy = form.cleaned_data['copy']
 
-            recipient = ['melnikovalena@yandex.ru']
+            recipient = ['gavchenok@yandex.ru']
             u_recipient = []
             # Если пользователь захотел получить копию себе, добавляем его в список получателей
             if copy:
@@ -74,7 +75,7 @@ def contact(request):
             except BadHeaderError:  # Защита от уязвимости
                 return HttpResponse('Invalid header found')
             # Переходим на другую страницу, если сообщение отправлено
-            return render(request, 'foto/thanks.html')
+            return HttpResponse(u"Ваше письмо отправлено!")
     else:
         # Заполняем форму
         form = ContactForm()

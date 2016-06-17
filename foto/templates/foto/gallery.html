@@ -3,6 +3,25 @@
     {% block head %}
 <script src="../static/js/jquery-1.11.3.min.js"></script>
     <script src="../static/js/gallery.js"></script>
+<script type="text/javascript">
+$(function(Nav){
+    $("a[href^='#']").on("click", function(e){
+         e.preventDefault();
+         $('div.box').show();
+         var idСlick = e.target.id;
+         $('div.box').not('#'+idСlick).hide();
+         $('.box-sizer').append( $('.box-sizer>div.box') );
+         return false;
+    });
+});
+$(function(All){
+    $("a[rel=all]").on("click", function(e){
+         e.preventDefault();
+         $('div.box').show();
+         return false;
+    });
+});
+</script>
     {% endblock %}
                    {% block content %}
 
@@ -14,15 +33,20 @@
                             <div class="col-md-12 gallery_title_main">
                                 <div class="gallery_title">
                                     <h3>ГАЛЕРЕЯ</h3>
-                                    <h4>ФОТОГРАФИИ</h4>
-                                </div><br style="clear:both;"/>
-                            </div>
+                                    <h4>Выберите раздел:</h4>
+                                </div>
+                                {% for c in categories %}
+                                <a href="#" class="btn view_more" id="{{c.id}}" rel="nav" style="margin: 3px;">{{ c.category }}</a>
+                                {% endfor %}
+                                <a href="#" class="btn view_more" id="0" rel="all" style="margin: 3px;">Все разделы</a>
+                                <br style="clear:both;"/>
 
+                            </div>
                             <div id="content" class="gallery-images-container">
                                 <div class="box-gutter"></div>
                                 <div class="box-sizer"></div>
                                 {% for f in foto %}
-                                <div class="box">
+                                <div class="box" id="{{ f.category.id }}">
                                     <a href="/media/{{ f.image }}"><img alt="Agra picture" src="/media/{{ f.image_prev }}"></a>
                                 </div>
                                 {% endfor %}

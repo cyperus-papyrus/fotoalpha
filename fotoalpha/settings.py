@@ -23,7 +23,7 @@ except ImportError:
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'acyt)crpsd#m!@*t8jcv5=#mchgydm3%um=7xp*5his@n$x*t8'
     database_name = 'fotoalpha'
-    database_user = 'admin'
+    database_user = '1'
     database_password = 'qazwsx'
     DISQUS_API_KEY = 'nonono'
     DISQUS_WEBSITE_SHORTNAME = 'fotoalpha'
@@ -33,7 +33,7 @@ except ImportError:
     SITE_ID = 2
     RECAPTCHA_PUBLIC_KEY = '1111'
     RECAPTCHA_PRIVATE_KEY = '2222'
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','fotoalfa.ru']
 
