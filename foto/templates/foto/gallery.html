@@ -10,9 +10,17 @@ $(function(Nav){
          $('div.box').show();
          var idСlick = e.target.id;
          $('div.box').not('#'+idСlick).hide();
-         $('.box-sizer').append( $('.box-sizer>div.box') );
+         $(window).load(function () {
+           var c = jQuery.makeArray($(".box-sizer div"));
+           c.sort(function (a, b) {
+               a = $(a).attr("id");
+               b = $(b).attr("id");
+               return b - a
+           });
+           $(c).appendTo(".box-sizer")
          return false;
     });
+});
 });
 $(function(All){
     $("a[rel=all]").on("click", function(e){

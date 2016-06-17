@@ -27,7 +27,7 @@ def foto(request, url):
 def allfoto(request):
     post_foto = Foto.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     categories = Category.objects.all()
-    paginator = Paginator(post_foto, 3)
+    paginator = Paginator(post_foto, 15)
     page = request.GET.get('page')
     try:
         fotos = paginator.page(page)
